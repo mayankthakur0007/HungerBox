@@ -29,7 +29,13 @@ class PaymentPage extends PolymerElement {
     paper-card{
         padding: 10px;
     }
+
+    .pay{
+        background-color:white;
+    }
 </style>
+
+<div class="pay">
 
 <h2>Payment Page</h2>
 <div>
@@ -41,7 +47,7 @@ class PaymentPage extends PolymerElement {
             <h4>Name : {{item.name}}</h4>
             <h4>Category : {{item.category}}</h4>
             <h4>Price : ₹{{item.price}}</h4>
-            <h4>Quantity : <iron-icon icon="remove" id="remove" on-click="_less"></iron-icon> {{item.quantity}}
+            <h4>Quantity : <iron-icon icon="remove" id="remove" on-click="_less"></iron-icon> {{quantity}}
                 <iron-icon icon="add" id="add" on-click="add"></iron-icon>
             </h4>
         </paper-card>
@@ -61,6 +67,8 @@ class PaymentPage extends PolymerElement {
 </paper-radio-group> <br>
 
 <paper-button raised class="custom indigo" on-click="_handleSummary">Submit</paper-button>
+
+</div>
 
 </div>
 
@@ -85,8 +93,22 @@ class PaymentPage extends PolymerElement {
             login: {
                 type: Boolean,
                 value: false
+            },
+            quantity:{
+                type:Number,
+                value:0
             }
         };
+    }
+
+    add(){
+        this.quantity+=1;
+    }
+
+    _less(){
+        if(this.quantity!=0){
+            this.quantity=this.quantity-1;
+        }
     }
 
 }
