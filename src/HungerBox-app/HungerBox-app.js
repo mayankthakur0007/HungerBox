@@ -131,7 +131,7 @@ _routePageChanged(page) {
 //
 // If no page was found in the route data, page will be an empty string.
 // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
-this.page = page || 'login';
+this.page = page || 'view1';
 
 }
 

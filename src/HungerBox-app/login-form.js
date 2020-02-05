@@ -5,6 +5,7 @@ import '../../node_modules/@polymer/paper-listbox/paper-listbox.js';
 import '../../node_modules/@polymer/paper-item/paper-item.js';
 import '../../node_modules/@polymer/paper-input/paper-input.js';
 import '../../node_modules/@polymer/app-route/app-location.js';
+import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
 
 /**
  * @customElement
@@ -103,7 +104,7 @@ class LoginForm extends PolymerElement {
     so that the list got again refreshed **/
 
     _getData() {
-        this._makeAjax(`http://localhost:3000/users`, "get", null);
+        // this._makeAjax(`http://localhost:3000/users`, "get", null);
     }
     handleLogin(event) {
         event.preventDefault();
