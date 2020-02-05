@@ -101,7 +101,7 @@ class FoodItems extends PolymerElement {
   so that the list got again refreshed **/
 
   _getData() {
-    this._makeAjax(`http://10.117.189.175:8080/mealbox/vendors/${this.vendorId}`, "get", null);
+    this._makeAjax(`http://10.117.189.181:8080/mealbox/vendors/${this.vendorId}`, "get", null);
   }
   // ajax call method
   _makeAjax(url, method, postObj) {

@@ -73,7 +73,7 @@ span{
 <div>
 <template is="dom-repeat" items={{order}}>
 <paper-card heading=""
-  image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+  image="{{item.imageUrl}}"
   alt="Go Nature">
   <h2>{{item.vendorName}}<span>Ratings: {{item.rating}} <iron-icon icon="star"></iron-icon></span></h2>
   
@@ -137,7 +137,7 @@ span{
 
   _getData() {
 
-    this._makeAjax(`http://10.117.189.175:8080/mealbox/vendors`, "get", null);
+    this._makeAjax(`http://10.117.189.181:8080/mealbox/vendors`, "get", null);
   }
 
 
