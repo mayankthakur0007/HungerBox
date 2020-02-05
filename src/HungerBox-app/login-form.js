@@ -82,6 +82,10 @@ class LoginForm extends PolymerElement {
             users: {
                 type: Array,
                 value: []
+            },
+            login: {
+                type: Boolean,
+                value: false
             }
         };
     }
@@ -105,7 +109,7 @@ class LoginForm extends PolymerElement {
                 employeeId: parseInt(this.$.sapId.value),
                 password: this.$.password.value
             }
-            console.log(obj)
+          
             this._makeAjax(`http://10.117.189.175:8080/mealbox/employees`, "post", obj);
         }
 
@@ -124,19 +128,26 @@ class LoginForm extends PolymerElement {
 
             case 'List':
                 this.users = event.detail.response;
-                console.log(this.users);
                 if (this.users.role == "ADMIN") {
+                    sessionStorage.setItem('name',this.users.employeeName)
+                    this.login = true;
+                    this.dispatchEvent(new CustomEvent('refresh-list', {detail: { isLoggedIn: true} ,bubbles: true, composed: true}));
                     this.set('route.path', '/admin');
                 }
                 if (this.users.role == "vendor") {
+                    sessionStorage.setItem('name',this.users.employeeName)
+                    this.dispatchEvent(new CustomEvent('refresh-list', {detail: {isLoggedIn: true} ,bubbles: true, composed: true}));
                     this.set('route.path', '/vendor');
                 }
                 if (this.users.role == "EMPLOYEE") {
+                    sessionStorage.setItem('name',this.users.employeeName)
+                    sessionStorage.setItem('customer',true)
+                    this.dispatchEvent(new CustomEvent('refresh-list', {detail: {isLoggedIn: true} ,bubbles: true, composed: true}));
                     this.set('route.path', '/home');
                 }
                 break;
         }
-
+  
 
     }
 

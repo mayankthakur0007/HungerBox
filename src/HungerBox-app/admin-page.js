@@ -4,7 +4,13 @@ import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
 import '../../node_modules/@polymer//polymer/lib/elements/dom-repeat.js';
 import '../../node_modules/@polymer/iron-collapse/iron-collapse.js';
 import '../../node_modules/@polymer/iron-form/iron-form.js';
+import '../../node_modules/@polymer/iron-icon/iron-icon.js';
+import '../../node_modules/@polymer/iron-icons/image-icons.js';
 import '../../node_modules/@polymer/paper-input/paper-input.js';
+import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
+import '@polymer/paper-listbox/paper-listbox.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/paper-card/paper-card.js';
 /**
 * @customElement
 * @polymer
@@ -34,7 +40,29 @@ class AdminPage extends PolymerElement {
   .head {
     text-align: center;
   }
+  paper-card {
+    width: 500px;
+    margin: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+  }
+span{
+  float:right;
+}
+  paper-button {
+    background-color: orange;
+  }
 
+  #workingLocation {
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+  h2 {
+    margin-left: 8px;
+  }
   .data {
     text-align: center;
   }
@@ -43,27 +71,17 @@ class AdminPage extends PolymerElement {
 <h1>Admin Portal</h1>
 <paper-button raised on-click="_handleAdd" class="btn btn-primary" id="add">Add</paper-button>
 <div>
-  <table class="table table-dark table-hover">
-    <tr>
-      <th class="head">Vendor Id</th>
-      <th class="head">Vendor Name</th>
-      <th class="head">Vendor Ratings</th>
-      <th class="head">Action</th>
-    </tr>
-    <template is="dom-repeat" items={{order}}>
-      <tr>
-        <td class="data">{{item.vendorId}}</td>
-        <td class="data">{{item.vendorName}}</td>
-        <td class="data">
-{{item.rating}}
-        </td>
-        <td class="data">
-          <paper-button raised on-click="_handleDelete" class="btn btn-primary">Delete</paper-button>
-        </td>
-      </tr>
-    </template>
-  </table>
-
+<template is="dom-repeat" items={{order}}>
+<paper-card heading=""
+  image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+  alt="Go Nature">
+  <h2>{{item.vendorName}}<span>Ratings: {{item.rating}} <iron-icon icon="star"></iron-icon></span></h2>
+  
+  <div class="card-actions">
+    <paper-button raised>Delete</paper-button>
+  </div>
+</paper-card>
+</template>
   <iron-collapse id="collapse">
     <iron-form id="form">
       <form>
@@ -179,7 +197,7 @@ class AdminPage extends PolymerElement {
 
       case 'List':
         this.order = event.detail.response;
-        console.log(this.order);
+     
         break;
 
 

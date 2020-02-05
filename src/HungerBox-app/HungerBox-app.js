@@ -83,21 +83,28 @@ class HungerBoxApp extends PolymerElement {
 <app-drawer-layout fullbleed="" narrow="{{narrow}}">
   <!-- Drawer content -->
   <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-    <app-toolbar>Menu</app-toolbar>
+  <template is="dom-if" if={{!login}}>
+    <app-toolbar>Login to Continue</app-toolbar>
+</template>
+<template is="dom-if" if={{login}}>
+    <app-toolbar>Welcome {{name}}</app-toolbar>
+    </template>
     <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-      <a name="login" href="[[rootPath]]login">Login</a>
-      <a name="view2" href="[[rootPath]]view2">My Profie</a>
-      <a name="view5" href="[[rootPath]]view5">My Orders</a>
-      <a name="view3" href="[[rootPath]]view3">About Us</a>
-      <a name="login" href="[[rootPath]]login">Logout</a>
-      <a name="admin" href="[[rootPath]]admin">Admin</a>
-      <a name="vendor" href="[[rootPath]]vendor">Vendor</a>
+    <template is="dom-if" if={{!login}}>
+      <a name="login" href="[[rootPath]]login"><paper-button>Login</paper-button></a>
+      <a name="view3" href="[[rootPath]]view3"><paper-button>About Us</paper-button></a>
+      </template>
+      <template is="dom-if" if={{customer}}>
+      <a name="view5" href="[[rootPath]]view5"><paper-button>My Orders</paper-button></a>
+      </template>
+      <template is="dom-if" if={{login}}>
+      <a name="view2" href="[[rootPath]]view2"><paper-button>My Profie</paper-button></a>
+      <a name="login" href="[[rootPath]]login"><paper-button on-click="_handleLogout">Logout</paper-button></a>
+      </template>
     </iron-selector>
   </app-drawer>
-
   <!-- Main content -->
   <app-header-layout has-scrolling-region="">
-
     <app-header slot="header" condenses="" reveals="" effects="waterfall">
       <app-toolbar>
         <paper-icon-button icon="my-icons:menu" drawer-toggle=""></paper-icon-button>
@@ -106,7 +113,6 @@ class HungerBoxApp extends PolymerElement {
         </div>
       </app-toolbar>
     </app-header>
-
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
       <login-form name="login"></login-form>
       <home-page name="home"></home-page>
@@ -128,18 +134,52 @@ class HungerBoxApp extends PolymerElement {
         reflectToAttribute: true,
         observer: '_pageChanged'
       },
+      name: {
+        type: String,
+        value: sessionStorage.getItem('name')
+      },
+      login: {
+        type: Boolean,
+        value: false
+      },
+      isLoggedIn: {
+        type: Boolean,
+        value: false,
+        observer: "_isLoggedInChanged"
+      },
+      customer: {
+        type: Boolean,
+        value: false
+      },
       routeData: Object,
-      subroute: Object
+      subroute: Object,
+
     };
   }
 
+  _handleLogout() {
+    sessionStorage.clear();
+    this.login = false;
+    this.customer = false;
+  }
   // observing the page change
   static get observers() {
     return [
       '_routePageChanged(routeData.page)'
     ];
   }
+  connectedCallback() {
+    super.connectedCallback();
+  }
 
+  _isLoggedInChanged() {
+    this.addEventListener('refresh-list', ()=> this._handleRefresh(event))
+  }
+  _handleRefresh(event) {
+    console.log( event.detail.isCustomer)
+    this.login = event.detail.isLoggedIn;
+    this.customer=sessionStorage.getItem('customer');
+  }
   /**
    *  Show the corresponding page according to the route.
    * If no page was found in the route data, page will be an empty string.
