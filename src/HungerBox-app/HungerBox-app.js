@@ -83,6 +83,8 @@ return html`
       <a name="view5" href="[[rootPath]]view5">My Orders</a>
       <a name="view3" href="[[rootPath]]view3">About Us</a>
       <a name="login" href="[[rootPath]]login">Logout</a>
+      <a name="admin" href="[[rootPath]]admin">Admin</a>
+      <a name="vendor" href="[[rootPath]]vendor">Vendor</a>
     </iron-selector>
   </app-drawer>
 
@@ -101,6 +103,8 @@ return html`
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
       <login-form name="login"></login-form>
       <home-page name="home"></home-page>
+      <vendor-page name="vendor"></vendor-page>
+      <admin-page name="admin"></admin-page>
       <my-view404 name="view404"></my-view404>
     </iron-pages>
   </app-header-layout>
@@ -131,7 +135,7 @@ _routePageChanged(page) {
 //
 // If no page was found in the route data, page will be an empty string.
 // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
-this.page = page || 'home';
+this.page = page || 'login';
 
 }
 
@@ -149,6 +153,10 @@ import('./home-page.js');
 break;
 case 'view3':
 import('./my-view3.js');
+break;case 'admin':
+import('./admin-page.js');
+break;case 'vendor':
+import('./vendor-page.js');
 break;
 case 'view404':
 import('./my-view404.js');
