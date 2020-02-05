@@ -7,10 +7,8 @@ import '../../node_modules/@polymer/paper-input/paper-input.js';
 import '../../node_modules/@polymer/app-route/app-location.js';
 import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
 import '../../node_modules/@polymer/iron-form/iron-form.js';
-
 import '@polymer/paper-radio-group/paper-radio-group.js';
 import '@polymer/paper-radio-button/paper-radio-button.js';
-
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/iron-icon/iron-icon.js';
 
@@ -40,18 +38,17 @@ class PaymentPage extends PolymerElement {
 <h2>Payment Page</h2>
 <div>
 
-   
-    <!-- <template is="dom-repeat" items={{order}}> -->
+    <h3>Cart</h3>
+    <template is="dom-repeat" items={{cartItems}}>
         <paper-card heading="">
-            <h3>Cart</h3>
-            <h4>Name : {{item.name}}</h4>
-            <h4>Category : {{item.category}}</h4>
+          
+            <h4>Name : {{item.foodName}}</h4>
             <h4>Price : ₹{{item.price}}</h4>
             <h4>Quantity : <iron-icon icon="remove" id="remove" on-click="_less"></iron-icon> {{quantity}}
                 <iron-icon icon="add" id="add" on-click="add"></iron-icon>
             </h4>
         </paper-card>
-    <!-- </template> -->
+    </template>
 
 
 </div>
@@ -66,7 +63,7 @@ class PaymentPage extends PolymerElement {
     <paper-radio-button name="PhonePe">Phone Pe</paper-radio-button>
 </paper-radio-group> <br>
 
-<paper-button raised class="custom indigo" on-click="_handleSummary">Submit</paper-button>
+<paper-button raised class="custom indigo" on-click="_handlePlaceOrder">Place Order</paper-button>
 
 </div>
 
@@ -77,39 +74,61 @@ class PaymentPage extends PolymerElement {
 
     static get properties() {
         return {
-
-            selected: {
-                type: Number,
-                value: 0
-            },
             action: {
                 type: String,
                 value: 'List'
             },
-            users: {
+            cartItems: {
                 type: Array,
-                value: []
+                value: this.cartItems
             },
-            login: {
-                type: Boolean,
-                value: false
-            },
-            quantity:{
-                type:Number,
-                value:0
+            quantity: {
+                type: Number,
+                value: 1
             }
         };
     }
 
-    add(){
-        this.quantity+=1;
+    add() {
+        this.quantity += 1;
     }
-
-    _less(){
-        if(this.quantity!=0){
-            this.quantity=this.quantity-1;
+    _handlePlaceOrder(){
+        
+    }
+    _less() {
+        if (this.quantity != 0) {
+            this.quantity = this.quantity - 1;
         }
     }
+    ready() {
+        super.ready();
+        console.log(this.cartItems)
+    }
 
+_getData() {
+    this._makeAjax(``, "get", null);
+}
+// ajax call method
+_makeAjax(url, method, postObj) {
+    const ajax = this.$.ajax;
+    ajax.method = method;
+    ajax.url = url;
+    ajax.body = postObj ? JSON.stringify(postObj) : undefined;
+    ajax.generateRequest();
+}
+
+
+// handle response of ajax call
+_handleResponse(event) {
+
+    switch (this.action) {
+
+        case 'List':
+            this.order = event.detail.response.itemcategoryList;
+            break;
+
+
+    }
+}
 }
 window.customElements.define('payment-app', PaymentPage);

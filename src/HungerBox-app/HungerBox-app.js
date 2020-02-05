@@ -118,6 +118,8 @@ class HungerBoxApp extends PolymerElement {
       <home-page name="home"></home-page>
       <order-page name="orders"></order-page>
       <vendor-page name="vendor"></vendor-page>
+      <my-order name="orders"></my-order>
+      <payment-app name="payment" cart-items={{cartItems}}></payment-app>
       <about-page name="about"></about-page>
       <food-items name="food" vendor-id={{vendorId}}></food-items>
       <admin-page name="admin"></admin-page>
@@ -142,6 +144,10 @@ class HungerBoxApp extends PolymerElement {
       login: {
         type: Boolean,
         value: false
+      },
+      cartItems: {
+        type: Array,
+        value:[]
       },
       isLoggedIn: {
         type: Boolean,
@@ -179,13 +185,17 @@ class HungerBoxApp extends PolymerElement {
   _isLoggedInChanged() {
     this.addEventListener('refresh-list', () => this._handleRefresh(event))
   }
-  ready(){
+  ready() {
     super.ready();
     this.addEventListener('vendor-id', () => this._handleId(event))
+    this.addEventListener('cart-list', () => this._handleCart(event))
   }
   // _vendorId() {
   //   this.addEventListener('vendor-id', () => this._handleId(event))
   // }
+  _handleCart(event){
+this.cartItems =event.detail.cart
+  }
   _handleId(event) {
     this.vendorId = event.detail.id;
   }
@@ -220,12 +230,15 @@ class HungerBoxApp extends PolymerElement {
       case 'about':
         import('./about-page.js');
         break;
+      case 'payment':
+        import('./payment-page.js');
+        break;
       case 'admin':
         import('./admin-page.js');
         break;
-        case 'orders':
-          import('./orders-page.js');
-          break;
+      case 'orders':
+        import('./orders-page.js');
+        break;
       case 'vendor':
         import('./vendor-page.js');
         break;
