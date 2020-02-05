@@ -3,6 +3,7 @@ import './shared-styles.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
+import '../../node_modules/@polymer/app-route/app-location.js';
 import '@polymer/paper-card/paper-card.js';
 import '../../node_modules/@polymer/app-route/app-location.js';
 import '../../node_modules/@polymer/iron-icon/iron-icon.js';
@@ -82,17 +83,11 @@ class MyView1 extends PolymerElement {
       }
     }
   }
-  _handleAdd() {
-    this.$.form.reset();
-    this.$.edit.style.display = "none";
-    this.$.save1.style.display = "block";
-    this.$.collapse.toggle();
-
-  }
-  _handleBuy(event){
-    let id = event.model.item.id;
-    this.dispatchEvent(new CustomEvent('vendor-id', {detail: {id: id} ,bubbles: true, composed: true}));
-this.set('route.path','/food');
+  _handleBuy(event) {
+    let id = event.model.item.vendorId;
+    console.log(id)
+    this.dispatchEvent(new CustomEvent('vendor-id', { detail: { id: id }, bubbles: true, composed: true }));
+    this.set('route.path', '/food');
   }
   connectedCallback() {
     super.connectedCallback();
@@ -167,7 +162,7 @@ this.set('route.path','/food');
 
       case 'List':
         this.order = event.detail.response;
-      
+
         break;
 
 
