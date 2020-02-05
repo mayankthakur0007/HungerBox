@@ -25,4 +25,4 @@ class HungerBoxApp extends PolymerElement {
   }
 }
 
-window.customElements.define('HungerBox-app', HungerBoxApp);
+window.customElements.define('hunger-app', HungerBoxApp);
