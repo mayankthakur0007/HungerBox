@@ -7,10 +7,8 @@ import '../../node_modules/@polymer/paper-input/paper-input.js';
 import '../../node_modules/@polymer/app-route/app-location.js';
 import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
 import '../../node_modules/@polymer/iron-form/iron-form.js';
-
 import '@polymer/paper-radio-group/paper-radio-group.js';
 import '@polymer/paper-radio-button/paper-radio-button.js';
-
 import '@polymer/iron-icons/iron-icons.js';
 import '@polymer/iron-icon/iron-icon.js';
 
@@ -94,20 +92,20 @@ class PaymentPage extends PolymerElement {
                 type: Boolean,
                 value: false
             },
-            quantity:{
-                type:Number,
-                value:0
+            quantity: {
+                type: Number,
+                value: 0
             }
         };
     }
 
-    add(){
-        this.quantity+=1;
+    add() {
+        this.quantity += 1;
     }
 
-    _less(){
-        if(this.quantity!=0){
-            this.quantity=this.quantity-1;
+    _less() {
+        if (this.quantity != 0) {
+            this.quantity = this.quantity - 1;
         }
     }
 

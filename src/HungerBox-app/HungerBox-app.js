@@ -119,6 +119,7 @@ class HungerBoxApp extends PolymerElement {
       <order-page name="orders"></order-page>
       <vendor-page name="vendor"></vendor-page>
       <about-page name="about"></about-page>
+      <payment-app name="payment"></payment-app>
       <food-items name="food" vendor-id={{vendorId}}></food-items>
       <admin-page name="admin"></admin-page>
       <my-view404 name="view404"></my-view404>
@@ -179,7 +180,7 @@ class HungerBoxApp extends PolymerElement {
   _isLoggedInChanged() {
     this.addEventListener('refresh-list', () => this._handleRefresh(event))
   }
-  ready(){
+  ready() {
     super.ready();
     this.addEventListener('vendor-id', () => this._handleId(event))
   }
@@ -223,9 +224,12 @@ class HungerBoxApp extends PolymerElement {
       case 'admin':
         import('./admin-page.js');
         break;
-        case 'orders':
-          import('./orders-page.js');
-          break;
+      case 'orders':
+        import('./orders-page.js');
+        break;
+      case 'payment':
+        import('./payment-page.js');
+        break;
       case 'vendor':
         import('./vendor-page.js');
         break;

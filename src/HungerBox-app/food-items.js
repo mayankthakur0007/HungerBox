@@ -7,6 +7,7 @@ import '../../node_modules/@polymer/iron-icon/iron-icon.js';
 import '../../node_modules/@polymer/iron-icons/iron-icons.js';
 import '../../node_modules/@polymer/paper-button/paper-button.js';
 import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
+import '../../node_modules/@polymer/app-route/app-location.js';
 import '../../node_modules/@polymer//polymer/lib/elements/dom-repeat.js';
 class FoodItems extends PolymerElement {
   static get template() {
@@ -99,7 +100,9 @@ class FoodItems extends PolymerElement {
   for the data with sell property value "yes" only. This function is also called when any new pet is added
   
   so that the list got again refreshed **/
-
+  _handleCart(){
+    this.set('route.path', '/payment');
+  }
   _getData() {
     this._makeAjax(`http://10.117.189.175:8080/mealbox/vendors/${this.vendorId}`, "get", null);
   }
