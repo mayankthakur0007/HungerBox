@@ -121,6 +121,7 @@ class HungerBoxApp extends PolymerElement {
       <my-order name="orders"></my-order>
       <payment-app name="payment" cart-items={{cartItems}}></payment-app>
       <about-page name="about"></about-page>
+      <payment-app name="payment"></payment-app>
       <food-items name="food" vendor-id={{vendorId}}></food-items>
       <admin-page name="admin"></admin-page>
       <my-view404 name="view404"></my-view404>

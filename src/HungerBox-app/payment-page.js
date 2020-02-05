@@ -85,15 +85,12 @@ class PaymentPage extends PolymerElement {
             quantity: {
                 type: Number,
                 value: 1
-            }
-        };
-    }
 
+            }
+        }
+    }
     add() {
         this.quantity += 1;
-    }
-    _handlePlaceOrder(){
-        
     }
     _less() {
         if (this.quantity != 0) {
@@ -105,30 +102,30 @@ class PaymentPage extends PolymerElement {
         console.log(this.cartItems)
     }
 
-_getData() {
-    this._makeAjax(``, "get", null);
-}
-// ajax call method
-_makeAjax(url, method, postObj) {
-    const ajax = this.$.ajax;
-    ajax.method = method;
-    ajax.url = url;
-    ajax.body = postObj ? JSON.stringify(postObj) : undefined;
-    ajax.generateRequest();
-}
-
-
-// handle response of ajax call
-_handleResponse(event) {
-
-    switch (this.action) {
-
-        case 'List':
-            this.order = event.detail.response.itemcategoryList;
-            break;
-
-
+    _getData() {
+        this._makeAjax(``, "get", null);
     }
-}
+    // ajax call method
+    _makeAjax(url, method, postObj) {
+        const ajax = this.$.ajax;
+        ajax.method = method;
+        ajax.url = url;
+        ajax.body = postObj ? JSON.stringify(postObj) : undefined;
+        ajax.generateRequest();
+    }
+
+
+    // handle response of ajax call
+    _handleResponse(event) {
+
+        switch (this.action) {
+
+            case 'List':
+                this.order = event.detail.response.itemcategoryList;
+                break;
+
+
+        }
+    }
 }
 window.customElements.define('payment-app', PaymentPage);
