@@ -100,7 +100,7 @@ return html`
 
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
       <login-form name="login"></login-form>
-      <my-view1 name="view1"></my-view1>
+      <home-page name="home"></home-page>
       <my-view404 name="view404"></my-view404>
     </iron-pages>
   </app-header-layout>
@@ -131,7 +131,7 @@ _routePageChanged(page) {
 //
 // If no page was found in the route data, page will be an empty string.
 // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
-this.page = page || 'view1';
+this.page = page || 'home';
 
 }
 
@@ -144,8 +144,8 @@ switch (page) {
 case 'login':
 import('./login-form.js');
 break;
-case 'view1':
-import('./my-view1.js');
+case 'home':
+import('./home-page.js');
 break;
 case 'view3':
 import('./my-view3.js');
