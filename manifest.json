@@ -1,0 +1,6 @@
+{
+  "name": "HungerBox",
+  "short_name": "HungerBox",
+  "start_url": "/",
+  "display": "standalone"
+}
