@@ -4,6 +4,7 @@
     "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.2",
     "@polymer/iron-ajax": "^3.0.1",
+    "@polymer/iron-collapse": "^3.0.1",
     "@polymer/iron-icon": "^3.0.1",
     "@polymer/iron-icons": "^3.0.1",
     "@polymer/iron-pages": "^3.0.1",
@@ -17,7 +18,8 @@
     "@polymer/paper-item": "^3.0.1",
     "@polymer/paper-listbox": "^3.0.1",
     "@polymer/paper-toast": "^3.0.1",
-    "@polymer/polymer": "^3.0.0"
+    "@polymer/polymer": "^3.0.0",
+    "bootstrap": "^4.4.1"
   },
   "devDependencies": {
     "@polymer/test-fixture": "^4.0.2",

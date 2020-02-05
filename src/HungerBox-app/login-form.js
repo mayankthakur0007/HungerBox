@@ -93,6 +93,9 @@ class LoginForm extends PolymerElement {
             }
         };
     }
+
+    
+
     connectedCallback() {
         super.connectedCallback();
         this._getData();
@@ -118,8 +121,8 @@ class LoginForm extends PolymerElement {
             for (let i = 0; i < users.length; i++) {
                 if (users[i].email == email && users[i].password == password) {
                     this.valid = "yes";
-                  
-                    let userdata =  users[i];
+
+                    let userdata = users[i];
                     let phone = users[i].mobile;
                     sessionStorage.setItem('phone', phone);
                     userdata = JSON.stringify(userdata);
