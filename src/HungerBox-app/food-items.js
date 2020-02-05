@@ -4,13 +4,12 @@ import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-card/paper-card.js';
-import '../../node_modules/@polymer/app-route/app-location.js';
 import '../../node_modules/@polymer/iron-icon/iron-icon.js';
 import '../../node_modules/@polymer/iron-icons/iron-icons.js';
 import '@polymer/paper-button/paper-button.js';
 import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
 import '../../node_modules/@polymer//polymer/lib/elements/dom-repeat.js';
-class MyView1 extends PolymerElement {
+class FoodItems extends PolymerElement {
   static get template() {
     return html`
 <style include="shared-styles">
@@ -43,9 +42,6 @@ class MyView1 extends PolymerElement {
     margin-left: 8px;
   }
 </style>
-
-<app-location route="{{route}}">
-      </app-location>
 <template is="dom-repeat" items={{order}}>
 <paper-card heading=""
   image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
@@ -53,7 +49,7 @@ class MyView1 extends PolymerElement {
   <h2>{{item.vendorName}}<span>Ratings: {{item.rating}} <iron-icon icon="star"></iron-icon></span></h2>
   
   <div class="card-actions">
-    <paper-button raised on-click="_handleBuy">Order Here</paper-button>
+    <paper-button raised>Order Here</paper-button>
   </div>
 </paper-card>
 </template>
@@ -75,10 +71,9 @@ class MyView1 extends PolymerElement {
         type: Array,
         value: []
       },
-      id:
-      {
-        type: String
-
+      vendorId: {
+        type: Number,
+        value: this.vendorId
       }
     }
   }
@@ -88,11 +83,6 @@ class MyView1 extends PolymerElement {
     this.$.save1.style.display = "block";
     this.$.collapse.toggle();
 
-  }
-  _handleBuy(event){
-    let id = event.model.item.id;
-    this.dispatchEvent(new CustomEvent('vendor-id', {detail: {id: id} ,bubbles: true, composed: true}));
-this.set('route.path','/food');
   }
   connectedCallback() {
     super.connectedCallback();
@@ -106,8 +96,8 @@ this.set('route.path','/food');
   so that the list got again refreshed **/
 
   _getData() {
-
-    this._makeAjax(`http://10.117.189.175:8080/mealbox/vendors`, "get", null);
+console.log(this.vendorId)
+    // this._makeAjax(`http://10.117.189.175:8080/mealbox/vendors/${this.vendorId}`, "get", null);
   }
 
 
@@ -166,12 +156,12 @@ this.set('route.path','/food');
     switch (this.action) {
 
       case 'List':
-        this.order = event.detail.response;
-      
+        this.order = event.detail.response.itemcategoryList;
+
         break;
 
 
     }
   }
 }
-window.customElements.define('home-page', MyView1);
+window.customElements.define('food-items', FoodItems);

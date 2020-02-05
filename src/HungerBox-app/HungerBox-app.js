@@ -92,8 +92,8 @@ class HungerBoxApp extends PolymerElement {
     <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
     <template is="dom-if" if={{!login}}>
       <a name="login" href="[[rootPath]]login"><paper-button>Login</paper-button></a>
-      <a name="view3" href="[[rootPath]]view3"><paper-button>About Us</paper-button></a>
       </template>
+      <a name="about" href="[[rootPath]]about"><paper-button>About Us</paper-button></a>
       <template is="dom-if" if={{customer}}>
       <a name="view5" href="[[rootPath]]view5"><paper-button>My Orders</paper-button></a>
       </template>
@@ -117,6 +117,8 @@ class HungerBoxApp extends PolymerElement {
       <login-form name="login"></login-form>
       <home-page name="home"></home-page>
       <vendor-page name="vendor"></vendor-page>
+      <about-page name="about"></about-page>
+      <food-items name="food" vendor-id={{vendorId}}></food-items>
       <admin-page name="admin"></admin-page>
       <my-view404 name="view404"></my-view404>
     </iron-pages>
@@ -147,6 +149,10 @@ class HungerBoxApp extends PolymerElement {
         value: false,
         observer: "_isLoggedInChanged"
       },
+      vendorId: {
+        type: Number,
+        observer: "_vendorId"
+      },
       customer: {
         type: Boolean,
         value: false
@@ -173,12 +179,19 @@ class HungerBoxApp extends PolymerElement {
   }
 
   _isLoggedInChanged() {
-    this.addEventListener('refresh-list', ()=> this._handleRefresh(event))
+    this.addEventListener('refresh-list', () => this._handleRefresh(event))
+  }
+  _vendorId() {
+    this.addEventListener('vendor-id', () => this._handleId(event))
+  }
+  _handleId(event) {
+    console.log(event.detail.id)
+    this.vendorId = event.detail.id;
   }
   _handleRefresh(event) {
-    console.log( event.detail.isCustomer)
+    console.log(event.detail.isCustomer)
     this.login = event.detail.isLoggedIn;
-    this.customer=sessionStorage.getItem('customer');
+    this.customer = sessionStorage.getItem('customer');
   }
   /**
    *  Show the corresponding page according to the route.
@@ -203,14 +216,17 @@ class HungerBoxApp extends PolymerElement {
       case 'home':
         import('./home-page.js');
         break;
-      case 'view3':
-        import('./my-view3.js');
+      case 'about':
+        import('./about-page.js');
         break;
       case 'admin':
         import('./admin-page.js');
         break;
       case 'vendor':
         import('./vendor-page.js');
+        break;
+      case 'food':
+        import('./food-items.js');
         break;
       case 'view404':
         import('./my-view404.js');
