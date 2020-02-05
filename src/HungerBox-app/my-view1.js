@@ -28,10 +28,19 @@ class MyView1 extends PolymerElement {
           width:500px;
           margin:10px;
           border: 2px solid black;
-          border-radius:2px;
+          border-radius: 10px;
+          padding: 5px;
         }
         paper-button{
           background-color:orange; 
+        }
+        #workingLocation{
+          background-color: white;
+          border-radius: 10px;
+          padding: 5px;
+        }
+        h2{
+          margin-left: 8px;
         }
       </style>
 
@@ -46,9 +55,9 @@ class MyView1 extends PolymerElement {
 
      
 <paper-card heading="" image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Snack It">
-<div class="card-content">
+
 <h2>Snack It</h2>
-  </div>
+  
 <div class="card-actions">
   
   <paper-button raised>Order Here </paper-button>
@@ -56,9 +65,9 @@ class MyView1 extends PolymerElement {
 </paper-card>
 
 <paper-card heading="" image="https://media.gettyimages.com/photos/authentic-indian-food-picture-id639389404?s=612x612" alt="Give Me 5">
-<div class="card-content">
+
 <h2>Give Me 5</h2>
-  </div>
+
 <div class="card-actions">
 <paper-button raised>Order Here </paper-button>
 
@@ -67,10 +76,10 @@ class MyView1 extends PolymerElement {
 
 
 <paper-card heading="" image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Dosa Talks">
-<div class="card-content">
+
 <h2>Dosa Talks</h2>
  
-</div>
+
 <div class="card-actions">
 <paper-button raised>Order Here </paper-button>
 
@@ -78,10 +87,10 @@ class MyView1 extends PolymerElement {
 </paper-card>
 
 <paper-card heading="" image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Go Nature">
-<div class="card-content">
+
 <h2>Go Nature</h2>
  
-</div>
+
 <div class="card-actions">
 <paper-button raised>Order Here </paper-button>
  
