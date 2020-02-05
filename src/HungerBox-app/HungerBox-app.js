@@ -95,7 +95,7 @@ class HungerBoxApp extends PolymerElement {
       </template>
       <a name="about" href="[[rootPath]]about"><paper-button>About Us</paper-button></a>
       <template is="dom-if" if={{customer}}>
-      <a name="view5" href="[[rootPath]]view5"><paper-button>My Orders</paper-button></a>
+      <a name="orders" href="[[rootPath]]orders"><paper-button>My Orders</paper-button></a>
       </template>
       <template is="dom-if" if={{login}}>
       <a name="view2" href="[[rootPath]]view2"><paper-button>My Profie</paper-button></a>
@@ -116,6 +116,7 @@ class HungerBoxApp extends PolymerElement {
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
       <login-form name="login"></login-form>
       <home-page name="home"></home-page>
+      <order-page name="orders"></order-page>
       <vendor-page name="vendor"></vendor-page>
       <about-page name="about"></about-page>
       <food-items name="food" vendor-id={{vendorId}}></food-items>
@@ -126,8 +127,6 @@ class HungerBoxApp extends PolymerElement {
 </app-drawer-layout>
 `;
   }
-
-
   //properties declaration and observer declaration
   static get properties() {
     return {
@@ -150,8 +149,7 @@ class HungerBoxApp extends PolymerElement {
         observer: "_isLoggedInChanged"
       },
       vendorId: {
-        type: Number,
-        observer: "_vendorId"
+        type: Number
       },
       customer: {
         type: Boolean,
@@ -181,11 +179,14 @@ class HungerBoxApp extends PolymerElement {
   _isLoggedInChanged() {
     this.addEventListener('refresh-list', () => this._handleRefresh(event))
   }
-  _vendorId() {
+  ready(){
+    super.ready();
     this.addEventListener('vendor-id', () => this._handleId(event))
   }
+  // _vendorId() {
+  //   this.addEventListener('vendor-id', () => this._handleId(event))
+  // }
   _handleId(event) {
-    console.log(event.detail.id)
     this.vendorId = event.detail.id;
   }
   _handleRefresh(event) {
@@ -222,6 +223,9 @@ class HungerBoxApp extends PolymerElement {
       case 'admin':
         import('./admin-page.js');
         break;
+        case 'orders':
+          import('./orders-page.js');
+          break;
       case 'vendor':
         import('./vendor-page.js');
         break;
