@@ -13,6 +13,16 @@ class HomeApp extends PolymerElement {
         }
       </style>
       <h2>Hello [[prop1]]!</h2>
+
+      <paper-dropdown-menu label="Travel Type" id="travelType" required>
+      <paper-listbox slot="dropdown-content" selected="0">
+       <paper-item>Economy</paper-item>
+       <paper-item>Business</paper-item>
+       </paper-listbox>
+     </paper-dropdown-menu>
+
+
+
     `;
   }
   static get properties() {
