@@ -21,9 +21,16 @@ setPassiveTouchGestures(true);
 // in `index.html`.
 setRootPath(MyAppGlobals.rootPath);
 
+
+/**
+ * main class that provides the core API for Polymer and main 
+ * features including template stamping,routing,
+ * and property change observation.
+ */
+
 class HungerBoxApp extends PolymerElement {
-static get template() {
-return html`
+  static get template() {
+    return html`
 <style>
   :host {
     --app-primary-color: #ff7a22;
@@ -110,59 +117,66 @@ return html`
   </app-header-layout>
 </app-drawer-layout>
 `;
-}
+  }
 
-static get properties() {
-return {
-page: {
-type: String,
-reflectToAttribute: true,
-observer: '_pageChanged'
-},
-routeData: Object,
-subroute: Object
-};
-}
 
-static get observers() {
-return [
-'_routePageChanged(routeData.page)'
-];
-}
+  //properties declaration and observer declaration
+  static get properties() {
+    return {
+      page: {
+        type: String,
+        reflectToAttribute: true,
+        observer: '_pageChanged'
+      },
+      routeData: Object,
+      subroute: Object
+    };
+  }
 
-_routePageChanged(page) {
-// Show the corresponding page according to the route.
-//
-// If no page was found in the route data, page will be an empty string.
-// Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
-this.page = page || 'login';
+  // observing the page change
+  static get observers() {
+    return [
+      '_routePageChanged(routeData.page)'
+    ];
+  }
 
-}
+  /**
+   *  Show the corresponding page according to the route.
+   * If no page was found in the route data, page will be an empty string.
+   * Show 'view1' in that case. And if the page doesn't exist, show 'view404'.     
+   */
+  _routePageChanged(page) {
+    this.page = page || 'login';
+  }
 
-_pageChanged(page) {
-// Import the page component on demand.
-//
-// Note: `polymer build` doesn't like string concatenation in the import
-// statement, so break it up.
-switch (page) {
-case 'login':
-import('./login-form.js');
-break;
-case 'home':
-import('./home-page.js');
-break;
-case 'view3':
-import('./my-view3.js');
-break;case 'admin':
-import('./admin-page.js');
-break;case 'vendor':
-import('./vendor-page.js');
-break;
-case 'view404':
-import('./my-view404.js');
-break;
-}
-}
+  /**
+   *  Import the page component on demand.
+   *  Note: `polymer build` doesn't like string concatenation in the import
+   *  statement, so break it up.   
+   */
+  _pageChanged(page) {
+
+    switch (page) {
+      case 'login':
+        import('./login-form.js');
+        break;
+      case 'home':
+        import('./home-page.js');
+        break;
+      case 'view3':
+        import('./my-view3.js');
+        break;
+      case 'admin':
+        import('./admin-page.js');
+        break;
+      case 'vendor':
+        import('./vendor-page.js');
+        break;
+      case 'view404':
+        import('./my-view404.js');
+        break;
+    }
+  }
 }
 
 window.customElements.define('hunger-app', HungerBoxApp);
