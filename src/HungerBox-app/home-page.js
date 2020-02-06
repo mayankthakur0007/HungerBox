@@ -1,3 +1,11 @@
+/**
+ * in this page, you will see  all vendors list with vendor name and rating,
+ */
+
+
+
+
+
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';

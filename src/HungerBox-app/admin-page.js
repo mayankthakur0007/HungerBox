@@ -1,3 +1,7 @@
+/**
+ * here admin can perform cred operation for vendors,he can add or delete vendors
+ */
+
 import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '../../node_modules/@polymer/paper-button/paper-button.js';
 import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
@@ -137,7 +141,7 @@ span{
 
   _getData() {
 
-    this._makeAjax(`http://10.117.189.175:8080/mealbox/vendors`, "get", null);
+    this._makeAjax(`http://10.117.189.181:8080/mealbox/vendors`, "get", null);
   }
 
 

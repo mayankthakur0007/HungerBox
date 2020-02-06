@@ -1,3 +1,7 @@
+/**
+* this is the main routing page of this application.
+*/
+
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { setPassiveTouchGestures, setRootPath } from '@polymer/polymer/lib/utils/settings.js';
 import '../../node_modules/@polymer/app-layout/app-drawer/app-drawer.js';
@@ -23,10 +27,9 @@ setRootPath(MyAppGlobals.rootPath);
 
 
 /**
- * main class that provides the core API for Polymer and main 
- * features including template stamping,routing,
- * and property change observation.
- */
+* main class that provides the core API for Polymer and main
+* features including template,routing and property change observation.
+*/
 
 class HungerBoxApp extends PolymerElement {
   static get template() {
@@ -83,23 +86,33 @@ class HungerBoxApp extends PolymerElement {
 <app-drawer-layout fullbleed="" narrow="{{narrow}}">
   <!-- Drawer content -->
   <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-  <template is="dom-if" if={{!login}}>
-    <app-toolbar>Login to Continue</app-toolbar>
-</template>
-<template is="dom-if" if={{login}}>
-    <app-toolbar>Welcome {{name}}</app-toolbar>
+    <template is="dom-if" if={{!login}}>
+      <app-toolbar>Login to Continue</app-toolbar>
+    </template>
+    <template is="dom-if" if={{login}}>
+      <app-toolbar>Welcome {{name}}</app-toolbar>
     </template>
     <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-    <template is="dom-if" if={{!login}}>
-      <a name="login" href="[[rootPath]]login"><paper-button>Login</paper-button></a>
+      <template is="dom-if" if={{!login}}>
+        <a name="login" href="[[rootPath]]login">
+          <paper-button>Login</paper-button>
+        </a>
       </template>
-      <a name="about" href="[[rootPath]]about"><paper-button>About Us</paper-button></a>
+      <a name="about" href="[[rootPath]]about">
+        <paper-button>About Us</paper-button>
+      </a>
       <template is="dom-if" if={{customer}}>
-      <a name="orders" href="[[rootPath]]orders"><paper-button>My Orders</paper-button></a>
+        <a name="orders" href="[[rootPath]]orders">
+          <paper-button>My Orders</paper-button>
+        </a>
       </template>
       <template is="dom-if" if={{login}}>
-      <a name="view2" href="[[rootPath]]view2"><paper-button>My Profie</paper-button></a>
-      <a name="login" href="[[rootPath]]login"><paper-button on-click="_handleLogout">Logout</paper-button></a>
+        <a name="view2" href="[[rootPath]]view2">
+          <paper-button>My Profie</paper-button>
+        </a>
+        <a name="login" href="[[rootPath]]login">
+          <paper-button on-click="_handleLogout">Logout</paper-button>
+        </a>
       </template>
     </iron-selector>
   </app-drawer>
@@ -185,7 +198,7 @@ class HungerBoxApp extends PolymerElement {
     this.addEventListener('vendor-id', () => this._handleId(event))
   }
   // _vendorId() {
-  //   this.addEventListener('vendor-id', () => this._handleId(event))
+  // this.addEventListener('vendor-id', () => this._handleId(event))
   // }
   _handleId(event) {
     this.vendorId = event.detail.id;
@@ -196,19 +209,19 @@ class HungerBoxApp extends PolymerElement {
     this.customer = sessionStorage.getItem('customer');
   }
   /**
-   *  Show the corresponding page according to the route.
-   * If no page was found in the route data, page will be an empty string.
-   * Show 'view1' in that case. And if the page doesn't exist, show 'view404'.     
-   */
+  * Show the corresponding page according to the route.
+  * If no page was found in the route data, page will be an empty string.
+  * Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
+  */
   _routePageChanged(page) {
     this.page = page || 'login';
   }
 
   /**
-   *  Import the page component on demand.
-   *  Note: `polymer build` doesn't like string concatenation in the import
-   *  statement, so break it up.   
-   */
+  * Import the page component on demand.
+  * Note: `polymer build` doesn't like string concatenation in the import
+  * statement, so break it up.
+  */
   _pageChanged(page) {
 
     switch (page) {

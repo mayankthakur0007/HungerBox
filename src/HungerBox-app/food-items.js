@@ -1,3 +1,7 @@
+/**
+ * all food list item will be show here, you can select veg and nonveg food item
+ */
+
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
 import '../../node_modules/@polymer/app-route/app-location.js';
@@ -104,7 +108,7 @@ class FoodItems extends PolymerElement {
     this.set('route.path', '/payment');
   }
   _getData() {
-    this._makeAjax(`http://10.117.189.175:8080/mealbox/vendors/${this.vendorId}`, "get", null);
+    this._makeAjax(`http://10.117.189.181:8080/mealbox/vendors/${this.vendorId}`, "get", null);
   }
   // ajax call method
   _makeAjax(url, method, postObj) {

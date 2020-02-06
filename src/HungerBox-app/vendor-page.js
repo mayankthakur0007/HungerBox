@@ -1,3 +1,8 @@
+/**
+ * vendors can add or delete items for their shop.
+ */
+
+
 import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '../../node_modules/@polymer/paper-button/paper-button.js';
 import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
