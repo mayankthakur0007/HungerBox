@@ -57,12 +57,13 @@ class MyView1 extends PolymerElement {
       </app-location>
 <template is="dom-repeat" items={{order}}>
 <paper-card heading=""
-  image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+  image="{{item.imageUrl}}"
   alt="Go Nature">
   <h2>{{item.vendorName}}<span>Ratings: {{item.rating}} <iron-icon icon="star"></iron-icon></span></h2>
-  
+ 
   <div class="card-actions">
     <paper-button raised on-click="_handleBuy">Order Here</paper-button>
+    
   </div>
 </paper-card>
 </template>
@@ -94,6 +95,7 @@ class MyView1 extends PolymerElement {
   _handleBuy(event) {
     let id = event.model.item.vendorId;
     console.log(id)
+    sessionStorage.setItem('id',id)
     this.dispatchEvent(new CustomEvent('vendor-id', { detail: { id: id }, bubbles: true, composed: true }));
     this.set('route.path', '/food');
   }
@@ -110,7 +112,7 @@ class MyView1 extends PolymerElement {
 
   _getData() {
 
-    this._makeAjax(`http://10.117.189.175:8080/mealbox/vendors`, "get", null);
+    this._makeAjax(`http://10.117.189.181:8080/mealbox/vendors`, "get", null);
   }
 
 

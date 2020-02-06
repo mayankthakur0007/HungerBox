@@ -61,7 +61,7 @@ class FoodItems extends PolymerElement {
 <paper-card heading=""
   image="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
   alt="Go Nature">
-  <h2>{{food.foodName}}<span>Price: {{food.price}}</span></h2>
+  <h2>{{food.foodName}}<span>Price: ₹{{food.price}}</span></h2>
   
   <div class="card-actions">
     <paper-button raised on-click="_handleAddToCart">Add To Cart</paper-button>
@@ -119,10 +119,18 @@ class FoodItems extends PolymerElement {
     ajax.generateRequest();
   }
   _handleAddToCart(event) {
-    console.log(event.model.__data.food)
-    this.push('cart', event.model.__data.food)
-   
+    let obj={
+      foodId:event.model.__data.food.foodId,
+      foodName:event.model.__data.food.foodName,
+      price:event.model.__data.food.price
+    }
+    this.push('cart', obj)
   }
+  _handleCart(){
+    this.dispatchEvent(new CustomEvent('cart-list', {detail: { cart: this.cart} ,bubbles: true, composed: true}));
+    this.set('route.path', '/payment');
+  }
+
   // handle response of ajax call
   _handleResponse(event) {
 
@@ -130,7 +138,6 @@ class FoodItems extends PolymerElement {
 
       case 'List':
         this.order = event.detail.response.itemcategoryList;
-        console.log(this.order)
         break;
 
 

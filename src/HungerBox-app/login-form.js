@@ -130,19 +130,22 @@ class LoginForm extends PolymerElement {
                 this.users = event.detail.response;
                 if (this.users.role == "ADMIN") {
                     sessionStorage.setItem('name',this.users.employeeName)
+                    sessionStorage.setItem('id',this.users.employeeId)
                     this.login = true;
                     this.dispatchEvent(new CustomEvent('refresh-list', {detail: { isLoggedIn: true} ,bubbles: true, composed: true}));
                     this.set('route.path', '/admin');
                 }
                 if (this.users.role == "vendor") {
                     sessionStorage.setItem('name',this.users.employeeName)
+                    sessionStorage.setItem('id',this.users.employeeId)
                     this.dispatchEvent(new CustomEvent('refresh-list', {detail: {isLoggedIn: true} ,bubbles: true, composed: true}));
                     this.set('route.path', '/vendor');
                 }
                 if (this.users.role == "EMPLOYEE") {
                     sessionStorage.setItem('name',this.users.employeeName)
                     sessionStorage.setItem('customer',true)
-                    this.dispatchEvent(new CustomEvent('refresh-list', {detail: {isLoggedIn: true} ,bubbles: true, composed: true}));
+                    sessionStorage.setItem('id',this.users.employeeId)
+                    this.dispatchEvent(new CustomEvent('refresh-list', {detail: { isLoggedIn: true} ,bubbles: true, composed: true}));
                     this.set('route.path', '/home');
                 }
                 break;
