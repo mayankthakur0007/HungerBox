@@ -95,10 +95,11 @@ class HungerBoxApp extends PolymerElement {
       </template>
       <a name="about" href="[[rootPath]]about"><paper-button>About Us</paper-button></a>
       <template is="dom-if" if={{customer}}>
-      <a name="orders" href="[[rootPath]]orders"><paper-button>My Orders</paper-button></a>
+      <a name="my-order" href="[[rootPath]]my-order"><paper-button>My Orders</paper-button></a>
       </template>
       <template is="dom-if" if={{login}}>
       <a name="view2" href="[[rootPath]]view2"><paper-button>My Profie</paper-button></a>
+      <a name="home" href="[[rootPath]]home"><paper-button>Home</paper-button></a>
       <a name="login" href="[[rootPath]]login"><paper-button on-click="_handleLogout">Logout</paper-button></a>
       </template>
     </iron-selector>
@@ -116,9 +117,8 @@ class HungerBoxApp extends PolymerElement {
     <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
       <login-form name="login"></login-form>
       <home-page name="home"></home-page>
-      <order-page name="orders"></order-page>
       <vendor-page name="vendor"></vendor-page>
-      <my-order name="orders"></my-order>
+      <my-order name="my-order"></my-order>
       <payment-app name="payment" cart-items={{cartItems}}></payment-app>
       <about-page name="about"></about-page>
       <payment-app name="payment"></payment-app>
@@ -237,8 +237,8 @@ this.cartItems =event.detail.cart
       case 'admin':
         import('./admin-page.js');
         break;
-      case 'orders':
-        import('./orders-page.js');
+      case 'my-order':
+        import('./myorder-page.js');
         break;
       case 'vendor':
         import('./vendor-page.js');

@@ -1,13 +1,10 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-input/paper-input.js';
-import '../../node_modules/@polymer/app-route/app-route.js';
+import '@polymer/app-route/app-route.js';
 import '@polymer/app-route/app-location.js';
-import '../../node_modules/@polymer/paper-button/paper-button.js';
-import '../../node_modules/@polymer/iron-ajax/iron-ajax.js';
-
+import '@polymer/paper-button/paper-button.js';
+import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-card/paper-card.js';
-
-
 import '@polymer/polymer/lib/elements/dom-repeat.js';
 
 
@@ -21,9 +18,7 @@ class MyOrder extends PolymerElement {
   static get template() {
     return html`
 <style>
-  :host {
-    display: block;
-  }
+
 
   paper-card {
     width: 500px
@@ -40,14 +35,13 @@ class MyOrder extends PolymerElement {
 
   h3 {
     padding-left: 20px;
+    color:white;
   }
 </style>
-
 <h3> Order history </h3>
 <template is='dom-repeat' items={{details}}>
   <paper-card>
     <h3>Order Details</h3>
-
     <p>foodOrderId:{{item.foodOrderId}}</p>
     <p>orderDate:{{item.orderDate}}</p>
     <p>orderStatus:{{item.orderStatus}}</p>
@@ -58,14 +52,10 @@ class MyOrder extends PolymerElement {
       <p>foodName: {{food.foodName}}</p>
       <p>quantity: {{food.quantity}}</p>
       <p>vendorName: {{food.vendorName}}</p>
-    
   </template>
   </paper-card>
   <hr/>
- 
   </template>
-
-
 <iron-ajax id="ajax" on-response="_handleResponse" handle-as="json" content-type='application/json'></iron-ajax>
 `;
   }
@@ -94,7 +84,6 @@ class MyOrder extends PolymerElement {
   connectedCallback() {
     super.connectedCallback();
     this._getData();
-
   }
 
   /** getdata function for fetching the data from the database and showing it. Ajax request is done in getting
@@ -104,8 +93,8 @@ class MyOrder extends PolymerElement {
   so that the list got again refreshed **/
 
   _getData() {
-    
-    this._makeAjax(`http://10.117.189.181:8080/mealbox/employees/51636737/orders`, "GET", null);
+    let id = sessionStorage.getItem('id')
+    this._makeAjax(`http://10.117.189.181:8080/mealbox/employees/${id}/orders`, "GET", null);
     this.action = 'List';
   }
   _makeAjax(url, method, postObj) {
@@ -117,12 +106,12 @@ class MyOrder extends PolymerElement {
     ajax.generateRequest();
   }
   _handleResponse(event) {
-    console.log(event.detail)
+
     switch (this.action) {
 
       case 'List':
         this.details = event.detail.response;
-        console.log(this.details);
+
 
         break;
     }

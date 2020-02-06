@@ -145,7 +145,7 @@ class LoginForm extends PolymerElement {
                     sessionStorage.setItem('name',this.users.employeeName)
                     sessionStorage.setItem('customer',true)
                     sessionStorage.setItem('id',this.users.employeeId)
-                    this.dispatchEvent(new CustomEvent('refresh-list', {detail: {isLoggedIn: true} ,bubbles: true, composed: true}));
+                    this.dispatchEvent(new CustomEvent('refresh-list', {detail: { isLoggedIn: true} ,bubbles: true, composed: true}));
                     this.set('route.path', '/home');
                 }
                 break;

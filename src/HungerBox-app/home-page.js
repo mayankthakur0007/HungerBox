@@ -87,6 +87,7 @@ class MyView1 extends PolymerElement {
   _handleBuy(event) {
     let id = event.model.item.vendorId;
     console.log(id)
+    sessionStorage.setItem('id',id)
     this.dispatchEvent(new CustomEvent('vendor-id', { detail: { id: id }, bubbles: true, composed: true }));
     this.set('route.path', '/food');
   }

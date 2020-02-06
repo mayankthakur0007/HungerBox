@@ -115,9 +115,12 @@ class FoodItems extends PolymerElement {
     ajax.generateRequest();
   }
   _handleAddToCart(event) {
-    console.log(event.model.__data.food)
-    this.push('cart', event.model.__data.food)
-   
+    let obj={
+      foodId:event.model.__data.food.foodId,
+      foodName:event.model.__data.food.foodName,
+      price:event.model.__data.food.price
+    }
+    this.push('cart', obj)
   }
   _handleCart(){
     this.dispatchEvent(new CustomEvent('cart-list', {detail: { cart: this.cart} ,bubbles: true, composed: true}));
